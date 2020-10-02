@@ -1,5 +1,4 @@
-import { BlogEntryEntity } from 'src/blog/model/blog-entry.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('ingredients_entry')
 export class IngredientsEntity {
@@ -26,10 +25,4 @@ export class IngredientsEntity {
 
   @Column({ default: 0 })
   sugarQuantity: number;
-
-  @ManyToOne(
-    type => BlogEntryEntity,
-    blog => blog.ingredientsEntry,
-  )
-  ingredientsEntry: BlogEntryEntity;
 }

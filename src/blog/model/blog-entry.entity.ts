@@ -4,10 +4,8 @@ import {
   Column,
   BeforeUpdate,
   ManyToOne,
-  OneToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
-import { IngredientsEntity } from 'src/ingredients/models/ingredients.entity';
 
 @Entity('blog_entry')
 export class BlogEntryEntity {
@@ -58,9 +56,24 @@ export class BlogEntryEntity {
   )
   author: UserEntity;
 
-  @OneToMany(
-    type => IngredientsEntity,
-    ingredientsEntity => ingredientsEntity.id,
-  )
-  ingredientsEntry: IngredientsEntity[];
+  @Column({ default: 0 })
+  totalWeight: number;
+
+  @Column('text', { array: true, default: '{}' })
+  dietLabels: string[];
+
+  @Column({ default: 0 })
+  calorieQuantity: number;
+
+  @Column({ default: 0 })
+  proteinQuantity: number;
+
+  @Column({ default: 0 })
+  carbQuantity: number;
+
+  @Column({ default: 0 })
+  fatQuantity: number;
+
+  @Column({ default: 0 })
+  sugarQuantity: number;
 }

@@ -8,9 +8,10 @@ export interface BlogEntry {
     body?: string;
     createdAt?: Date;
     updatedAt?: Date;
-    likes?: number;
     author?: User;
     headerImage?: string;
     publishedDate?: Date;
     isPublished?: boolean;
+    likes: string[];
+    isLiked?: boolean;
 }

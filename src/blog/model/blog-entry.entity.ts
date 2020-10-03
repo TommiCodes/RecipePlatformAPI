@@ -18,7 +18,7 @@ export class BlogEntryEntity {
   @Column()
   slug: string;
 
-  @Column('text', { array: true })
+  @Column('text', { array: true, nullable: true })
   ingr: string[];
 
   @Column({ default: '' })
@@ -37,9 +37,6 @@ export class BlogEntryEntity {
   updateTimestamp() {
     this.updatedAt = new Date();
   }
-
-  @Column({ default: 0 })
-  likes: number;
 
   @Column({ nullable: true })
   headerImage: string;
@@ -76,4 +73,13 @@ export class BlogEntryEntity {
 
   @Column({ default: 0 })
   sugarQuantity: number;
+
+  @Column('text', { array: true, nullable: true })
+  likes: string[];
+
+
+  @Column({default: false, nullable: true})
+  isLiked: boolean;
+
+ 
 }

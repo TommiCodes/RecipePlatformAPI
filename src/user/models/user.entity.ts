@@ -28,6 +28,9 @@ export class UserEntity {
     @Column({nullable: true})
     profileImage: string;
 
+    @Column({default: false, nullable: true})
+    favourite: boolean;
+
     @OneToMany(type => BlogEntryEntity, blogEntryEntity => blogEntryEntity.author)
     blogEntries: BlogEntryEntity[];
 

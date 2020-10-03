@@ -9,6 +9,8 @@ export interface User {
     role?: UserRole;
     profileImage?: string;
     blogEntries?: BlogEntry[];
+    favourite?: boolean;
+
 }
 
 export enum UserRole {

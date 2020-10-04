@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
 
-@Entity('blog_entry')
-export class BlogEntryEntity {
+@Entity('recipe_entry')
+export class RecipeEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -49,7 +49,7 @@ export class BlogEntryEntity {
 
   @ManyToOne(
     type => UserEntity,
-    user => user.blogEntries,
+    user => user.recipeEntries,
   )
   author: UserEntity;
 
@@ -77,9 +77,6 @@ export class BlogEntryEntity {
   @Column('text', { array: true, nullable: true })
   likes: string[];
 
-
-  @Column({default: false, nullable: true})
+  @Column({ default: false, nullable: true })
   isLiked: boolean;
-
- 
 }

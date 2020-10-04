@@ -1,0 +1,23 @@
+c
+/*@UseGuards(JwtAuthGuard)
+  @Post('recipe/:id')
+  createComment(
+    @Param() params,
+    @Body() commentEntry: string,
+    @Request() req,
+  ): Observable<RecipeEntry> {
+    const user = req.user;
+    const id = params.id;
+    return this.recipeService.createComment(user, id, commentEntry);
+  }*/
+
+
+  s
+  /*createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
+    return from(this.findOne(id)).pipe(
+      switchMap((recipe: RecipeEntry) => {
+        const newComment = recipe.comments.push(commentEntry);
+        return this.recipeRepository.save(newComment);
+      }),
+    );
+  }*/

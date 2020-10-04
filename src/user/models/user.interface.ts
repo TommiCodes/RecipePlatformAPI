@@ -1,21 +1,20 @@
-import { BlogEntry } from "src/blog/model/blog-entry.interface";
+import { RecipeEntry } from 'src/recipe/model/recipe-entry.interface';
 
 export interface User {
-    id?: number;
-    name?: string;
-    username?: string;
-    email?: string;
-    password?: string;
-    role?: UserRole;
-    profileImage?: string;
-    blogEntries?: BlogEntry[];
-    favourite?: boolean;
-
+  id?: number;
+  name?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  role?: UserRole;
+  profileImage?: string;
+  recipeEntries?: RecipeEntry[];
+  favourite?: boolean;
 }
 
 export enum UserRole {
-    ADMIN = 'admin',
-    CHIEFEDITOR = 'chiefeditor',    
-    EDITOR = 'editor',
-    USER = 'user'
+  ADMIN = 'admin',
+  CHIEFEDITOR = 'chiefeditor',
+  EDITOR = 'editor',
+  USER = 'user',
 }

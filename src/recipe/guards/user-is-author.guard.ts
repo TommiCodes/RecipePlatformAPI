@@ -1,6 +1,6 @@
 import { CanActivate, Injectable, ExecutionContext } from '@nestjs/common';
 import { UserService } from 'src/user/service/user.service';
-import { BlogService } from '../service/recipe.service';
+import { RecipeService } from '../service/recipe.service';
 import { Observable } from 'rxjs';
 import { User } from 'src/user/models/user.interface';
 import { switchMap, map } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { RecipeEntry } from '../model/recipe-entry.interface';
 export class UserIsAuthorGuard implements CanActivate {
   constructor(
     private userService: UserService,
-    private recipeService: BlogService,
+    private recipeService: RecipeService,
   ) {}
 
   canActivate(context: ExecutionContext): Observable<boolean> {

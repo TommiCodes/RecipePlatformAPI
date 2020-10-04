@@ -13,7 +13,7 @@ import {
   UploadedFile,
   Res,
 } from '@nestjs/common';
-import { BlogService } from '../service/recipe.service';
+import { RecipeService } from '../service/recipe.service';
 import { Observable, of } from 'rxjs';
 import { RecipeEntry } from '../model/recipe-entry.interface';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
@@ -26,6 +26,7 @@ import path = require('path');
 import { Image } from '../model/Image.interface';
 import { join } from 'path';
 import { CommentsEntity } from 'src/comments/model/comments.entity';
+import { CommentsEntry } from 'src/comments/model/comments.interface';
 
 export const BLOG_ENTRIES_URL = 'http://localhost:3000/api/recipe-entries';
 
@@ -44,7 +45,7 @@ export const storage = {
 
 @Controller('recipe-entries')
 export class BlogController {
-  constructor(private recipeService: BlogService) {}
+  constructor(private recipeService: RecipeService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -130,16 +131,14 @@ export class BlogController {
     );
   }
 
-  /*
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)
   @Post('recipe/:id')
   createComment(
     @Param() params,
-    @Body() comment: CommentsEntity,
+    @Body() commentBody: string,
     @Request() req,
   ): Observable<RecipeEntry> {
-    const user = req.user;
     const id = params.id;
-    return this.recipeService.createComment(user, id, comment);
+    return this.recipeService.createComment(id, commentBody);
   }*/
 }

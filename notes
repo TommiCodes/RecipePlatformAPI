@@ -1,4 +1,15 @@
-
+c
+/*@UseGuards(JwtAuthGuard)
+  @Post('recipe/:id')
+  createComment(
+    @Param() params,
+    @Body() commentEntry: string,
+    @Request() req,
+  ): Observable<RecipeEntry> {
+    const user = req.user;
+    const id = params.id;
+    return this.recipeService.createComment(user, id, commentEntry);
+  }*/
 
 
   s

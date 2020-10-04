@@ -13,10 +13,11 @@ import {
   paginate,
 } from 'nestjs-typeorm-paginate';
 import { CommentsEntity } from 'src/comments/model/comments.entity';
+import { CommentsEntry } from 'src/comments/model/comments.interface';
 const slugify = require('slugify');
 
 @Injectable()
-export class BlogService {
+export class RecipeService {
   constructor(
     @InjectRepository(RecipeEntity)
     private readonly recipeRepository: Repository<RecipeEntity>,

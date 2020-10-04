@@ -94,4 +94,8 @@ export class RecipeEntity {
     comment => comment.recipe_id,
   )
   comments: CommentsEntity[];
+
+  //body is the comment. just testing
+  @Column('text', { array: true, nullable: true })
+  commentBody: string[];
 }

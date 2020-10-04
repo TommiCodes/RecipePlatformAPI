@@ -91,7 +91,9 @@ export class BlogService {
     return of(slugify(title));
   }
 
-  /*createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
+  /* TODO LATER COMMENTS API */
+  /*
+  createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
     return from(this.findOne(id)).pipe(
       switchMap((recipe: RecipeEntry) => {
         const newComment = recipe.comment.push(commentEntry);

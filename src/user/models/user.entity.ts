@@ -43,7 +43,7 @@ export class UserEntity {
 
   @OneToMany(
     type => CommentsEntity,
-    recipeEntryEntity => recipeEntryEntity.author,
+    comment => comment.author,
   )
   commentEntries: CommentsEntity[];
 

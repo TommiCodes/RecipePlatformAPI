@@ -91,7 +91,7 @@ export class RecipeEntity {
 
   @OneToMany(
     type => CommentsEntity,
-    comments => comments.comment,
+    comment => comment.recipe_id,
   )
-  comment: CommentsEntity[];
+  comments: CommentsEntity[];
 }

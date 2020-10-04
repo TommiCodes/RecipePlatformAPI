@@ -15,5 +15,5 @@ export interface RecipeEntry {
   isPublished?: boolean;
   likes?: string[];
   isLiked?: boolean;
-  comment: CommentsEntity[];
+  comments: CommentsEntity[];
 }

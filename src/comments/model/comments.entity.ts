@@ -29,7 +29,7 @@ export class CommentsEntity {
 
   @ManyToOne(
     type => UserEntity,
-    user => user.username,
+    user => user.id,
   )
   author: UserEntity;
 
@@ -41,7 +41,7 @@ export class CommentsEntity {
 
   @ManyToOne(
     type => RecipeEntity,
-    recipe => recipe.comment,
+    recipe => recipe.id,
   )
   @JoinColumn({ name: 'recipe_id', referencedColumnName: 'id' })
   comment: RecipeEntity;

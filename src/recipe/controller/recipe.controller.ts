@@ -129,16 +129,15 @@ export class BlogController {
     );
   }
 
-  /*
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)
   @Post('recipe/:id')
   createComment(
     @Param() params,
-    @Body() commentEntry: string,
+    @Body() comment: string,
     @Request() req,
-  ): Observable<RecipeEntryEntity> {
+  ): Observable<RecipeEntry> {
     const user = req.user;
     const id = params.id;
-    return this.recipeService.createComment(user, id, commentEntry);
+    return this.recipeService.createComment(user, id, comment);
   }*/
 }

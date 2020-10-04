@@ -4,8 +4,13 @@ import {
   Column,
   BeforeUpdate,
   ManyToOne,
+  JoinColumn,
+  OneToMany,
+  JoinTable,
+  ManyToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
+import { CommentsEntity } from 'src/comments/model/comments.entity';
 
 @Entity('recipe_entry')
 export class RecipeEntity {
@@ -47,10 +52,14 @@ export class RecipeEntity {
   @Column({ nullable: true })
   isPublished: boolean;
 
+  @Column()
+  user_id: number;
+
   @ManyToOne(
     type => UserEntity,
     user => user.recipeEntries,
   )
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   author: UserEntity;
 
   @Column({ default: 0 })
@@ -79,4 +88,10 @@ export class RecipeEntity {
 
   @Column({ default: false, nullable: true })
   isLiked: boolean;
+
+  @OneToMany(
+    type => CommentsEntity,
+    comments => comments.comment,
+  )
+  comment: CommentsEntity[];
 }

@@ -1,3 +1,4 @@
+import { CommentsEntry } from 'src/comments/model/comments.interface';
 import { RecipeEntry } from 'src/recipe/model/recipe-entry.interface';
 
 export interface User {
@@ -9,6 +10,7 @@ export interface User {
   role?: UserRole;
   profileImage?: string;
   recipeEntries?: RecipeEntry[];
+  commentEntries?: CommentsEntry[];
   favourite?: boolean;
 }
 

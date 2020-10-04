@@ -12,6 +12,7 @@ import {
   IPaginationOptions,
   paginate,
 } from 'nestjs-typeorm-paginate';
+import { CommentsEntity } from 'src/comments/model/comments.entity';
 const slugify = require('slugify');
 
 @Injectable()
@@ -90,11 +91,10 @@ export class BlogService {
     return of(slugify(title));
   }
 
-  /*
-  createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
+  /*createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
     return from(this.findOne(id)).pipe(
       switchMap((recipe: RecipeEntry) => {
-        const newComment = recipe.comments.push(commentEntry);
+        const newComment = recipe.comment.push(commentEntry);
         return this.recipeRepository.save(newComment);
       }),
     );

@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { UserRole } from './user.interface';
 import { RecipeEntity } from 'src/recipe/model/recipe-entry.entity';
+import { CommentsEntity } from 'src/comments/model/comments.entity';
 
 @Entity()
 export class UserEntity {
@@ -36,9 +37,15 @@ export class UserEntity {
 
   @OneToMany(
     type => RecipeEntity,
-    recipeEntryEntity => recipeEntryEntity.author,
+    recipeEntity => recipeEntity.author,
   )
   recipeEntries: RecipeEntity[];
+
+  @OneToMany(
+    type => CommentsEntity,
+    recipeEntryEntity => recipeEntryEntity.author,
+  )
+  commentEntries: CommentsEntity[];
 
   @BeforeInsert()
   emailToLowerCase() {

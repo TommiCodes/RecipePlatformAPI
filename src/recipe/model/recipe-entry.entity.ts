@@ -5,8 +5,11 @@ import {
   BeforeUpdate,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
+import { MacroEntity } from 'src/macros/models/macros.entity';
 
 @Entity('recipe_entry')
 export class RecipeEntity {
@@ -18,9 +21,6 @@ export class RecipeEntity {
 
   @Column()
   slug: string;
-
-  @Column('text', { array: true, nullable: true })
-  ingr: string[];
 
   @Column({ default: '' })
   description: string;
@@ -58,14 +58,38 @@ export class RecipeEntity {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   author: UserEntity;
 
-  @Column({ default: 0 })
+  @Column('int', { array: true, nullable: true, default: '{}' })
+  likes: number[];
+
+  @Column({ default: false, nullable: true })
+  isLiked: boolean;
+
+  @Column('text', { array: true, nullable: true, default: '{}' })
+  comments: string[];
+
+  @Column('text', { array: true, nullable: true, default: '{}' })
+  ingr: string[];
+  /*
+  @OneToMany(
+    type => CommentsEntity,
+    comment => comment.recipe_id,
+  )
+  comments: CommentsEntity[];
+
+  //body is the comment. just testing
+  @Column('text', { array: */
+
+  //Macro table TODO LATER
+  @ManyToMany(() => MacroEntity)
+  @JoinTable()
+  macros: MacroEntity[];
+
+  //delete LATER
+  /*@Column({ default: 0 })
   totalWeight: number;
 
   @Column('text', { array: true, default: '{}' })
   dietLabels: string[];
-
-  @Column({ default: 0 })
-  calorieQuantity: number;
 
   @Column({ default: 0 })
   proteinQuantity: number;
@@ -77,23 +101,8 @@ export class RecipeEntity {
   fatQuantity: number;
 
   @Column({ default: 0 })
-  sugarQuantity: number;
+  sugarQuantity: number;*/
 
-  @Column('int', { array: true, nullable: true, default: '{}' })
-  likes: number[];
-
-  @Column({ default: false, nullable: true })
-  isLiked: boolean;
-
-  @Column('text', { array: true, nullable: true, default: '{}' })
-  comments: string[];
-  /*
-  @OneToMany(
-    type => CommentsEntity,
-    comment => comment.recipe_id,
-  )
-  comments: CommentsEntity[];
-
-  //body is the comment. just testing
-  @Column('text', { array: */
+  @Column({ default: 0 })
+  calorieQuantity: number;
 }

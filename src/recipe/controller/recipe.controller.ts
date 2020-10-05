@@ -162,4 +162,19 @@ export class BlogController {
   async findAllLikes(@Param('id') id: number): Promise<number> {
     return await this.recipeService.findAllLikes(id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('ingredients/:id')
+  async createIngredients(
+    @Param('id') id: number,
+    @Body('ingr') ingr: string,
+  ): Promise<RecipeEntry> {
+    return await this.recipeService.createIngredients(id, ingr);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('ingredients/:id')
+  async findAllIngredients(@Param('id') id: number): Promise<string[]> {
+    return await this.recipeService.findAllIngredients(id);
+  }
 }

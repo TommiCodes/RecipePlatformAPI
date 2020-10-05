@@ -1,5 +1,5 @@
 SELECT *
-FROM user_entity
+FROM recipe_entry_macros_macro_entity
 
 
 

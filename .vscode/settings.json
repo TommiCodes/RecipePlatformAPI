@@ -1,0 +1,14 @@
+{
+    "debug.node.autoAttach": "off",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "postgrest_db",
+            "connectString": "postgres://nffxyweg:P1vQlEapWxQ4nz-_5Z7oQUWKjTl8-Lal@lallah.db.elephantsql.com:5432/nffxyweg"
+        }
+    ]
+}

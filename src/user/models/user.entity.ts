@@ -33,9 +33,6 @@ export class UserEntity {
   @Column({ nullable: true })
   profileImage: string;
 
-  @Column({ default: false, nullable: true })
-  favourite: boolean;
-
   @OneToMany(
     type => RecipeEntity,
     recipeEntity => recipeEntity.author,

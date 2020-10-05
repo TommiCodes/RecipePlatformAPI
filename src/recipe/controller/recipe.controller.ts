@@ -27,6 +27,7 @@ import { v4 as uuidv4 } from 'uuid';
 import path = require('path');
 import { Image } from '../model/Image.interface';
 import { join } from 'path';
+import { User } from 'src/user/models/user.interface';
 
 export const BLOG_ENTRIES_URL = 'http://localhost:3000/api/recipe-entries';
 
@@ -144,5 +145,21 @@ export class BlogController {
   @Get('comments/:id')
   async findAllComments(@Param('id') id: number): Promise<string[]> {
     return await this.recipeService.findAllComments(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('likes/:id')
+  async createLikes(
+    @Param('id') recipe_id: number,
+    @Request() req,
+  ): Promise<RecipeEntry> {
+    const user = req.user;
+    return await this.recipeService.createLikes(user, recipe_id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('likes/:id')
+  async findAllLikes(@Param('id') id: number): Promise<number> {
+    return await this.recipeService.findAllLikes(id);
   }
 }

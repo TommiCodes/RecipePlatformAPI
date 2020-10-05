@@ -13,7 +13,7 @@ export interface RecipeEntry {
   headerImage?: string;
   publishedDate?: Date;
   isPublished?: boolean;
-  likes?: string[];
+  likes?: number[];
   isLiked?: boolean;
   comments?: string[];
   //comments?: CommentsEntity[];

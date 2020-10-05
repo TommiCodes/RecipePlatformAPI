@@ -91,25 +91,35 @@ export class RecipeService {
     return of(slugify(title));
   }
 
-  /* TODO LATER COMMENTS API */
-  /*
-  createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
-    return from(this.findOne(id)).pipe(
-      switchMap((recipe: RecipeEntry) => {
-        const newComment = recipe.comment.push(commentEntry);
-        return this.recipeRepository.save(newComment);
-      }),
-    );
-  }*/
-
   async createComment(id: number, comment: string): Promise<RecipeEntry> {
     const recipe = await this.findOne(id).toPromise();
     recipe.comments.push(comment);
-    return this.recipeRepository.save(recipe);
+    return await this.recipeRepository.save(recipe);
   }
 
   async findAllComments(id: number): Promise<string[]> {
     const recipe = await this.findOne(id).toPromise();
     return recipe.comments;
+  }
+
+  async createLikes(user: User, recipe_id: number): Promise<RecipeEntry> {
+    const recipe = await this.findOne(recipe_id).toPromise();
+
+    const { likes } = recipe;
+    if (likes !== null && likes.includes(user.id)) {
+      console.log('estouaqui');
+      const index = likes.indexOf(user.id);
+      if (index > -1) {
+        likes.splice(index, 1);
+      }
+    } else {
+      likes.push(user.id);
+    }
+    return await this.recipeRepository.save(recipe);
+  }
+
+  async findAllLikes(id: number): Promise<number> {
+    const recipe = await this.findOne(id).toPromise();
+    return await recipe.likes.length;
   }
 }

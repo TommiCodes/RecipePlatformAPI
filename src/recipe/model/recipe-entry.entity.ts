@@ -79,13 +79,13 @@ export class RecipeEntity {
   @Column({ default: 0 })
   sugarQuantity: number;
 
-  @Column('text', { array: true, nullable: true })
-  likes: string[];
+  @Column('int', { array: true, nullable: true, default: '{}' })
+  likes: number[];
 
   @Column({ default: false, nullable: true })
   isLiked: boolean;
 
-  @Column('text', { array: true, nullable: true })
+  @Column('text', { array: true, nullable: true, default: '{}' })
   comments: string[];
   /*
   @OneToMany(

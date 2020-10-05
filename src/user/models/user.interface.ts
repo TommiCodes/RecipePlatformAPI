@@ -11,7 +11,6 @@ export interface User {
   profileImage?: string;
   recipeEntries?: RecipeEntry[];
   commentEntries?: CommentsEntry[];
-  favourite?: boolean;
 }
 
 export enum UserRole {

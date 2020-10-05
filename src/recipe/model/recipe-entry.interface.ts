@@ -2,7 +2,7 @@
 import { User } from 'src/user/models/user.interface';
 
 export interface RecipeEntry {
-  id?: number;
+  id: number;
   title?: string;
   slug?: string;
   description?: string;
@@ -15,6 +15,7 @@ export interface RecipeEntry {
   isPublished?: boolean;
   likes?: string[];
   isLiked?: boolean;
+  comments?: string[];
   //comments?: CommentsEntity[];
   //commentBody?: string[];
 }

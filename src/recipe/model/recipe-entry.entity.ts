@@ -85,6 +85,8 @@ export class RecipeEntity {
   @Column({ default: false, nullable: true })
   isLiked: boolean;
 
+  @Column('text', { array: true, nullable: true })
+  comments: string[];
   /*
   @OneToMany(
     type => CommentsEntity,

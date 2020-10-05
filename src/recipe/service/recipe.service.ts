@@ -101,4 +101,15 @@ export class RecipeService {
       }),
     );
   }*/
+
+  async createComment(id: number, comment: string): Promise<RecipeEntry> {
+    const recipe = await this.findOne(id).toPromise();
+    recipe.comments.push(comment);
+    return this.recipeRepository.save(recipe);
+  }
+
+  async findAllComments(id: number): Promise<string[]> {
+    const recipe = await this.findOne(id).toPromise();
+    return recipe.comments;
+  }
 }

@@ -18,7 +18,7 @@ export class CommentsEntity {
 
   @ManyToOne(
     () => UserEntity,
-    user => user.id,
+    user => user.commentEntries,
   )
   author: UserEntity;
 

@@ -131,14 +131,18 @@ export class BlogController {
     );
   }
 
-  /*@UseGuards(JwtAuthGuard)
-  @Post('recipe/:id')
-  createComment(
-    @Param() params,
-    @Body() commentBody: string,
-    @Request() req,
-  ): Observable<RecipeEntry> {
-    const id = params.id;
-    return this.recipeService.createComment(id, commentBody);
-  }*/
+  @UseGuards(JwtAuthGuard)
+  @Post('comment/:id')
+  async createComment(
+    @Param('id') id: number,
+    @Body('comment') comment: string,
+  ): Promise<RecipeEntry> {
+    return await this.recipeService.createComment(id, comment);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('comments/:id')
+  async findAllComments(@Param('id') id: number): Promise<string[]> {
+    return await this.recipeService.findAllComments(id);
+  }
 }

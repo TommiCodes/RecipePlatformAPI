@@ -5,12 +5,8 @@ import {
   BeforeUpdate,
   ManyToOne,
   JoinColumn,
-  OneToMany,
-  JoinTable,
-  ManyToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
-import { CommentsEntity } from 'src/comments/model/comments.entity';
 
 @Entity('recipe_entry')
 export class RecipeEntity {
@@ -56,7 +52,7 @@ export class RecipeEntity {
   user_id: number;
 
   @ManyToOne(
-    type => UserEntity,
+    () => UserEntity,
     user => user.recipeEntries,
   )
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
@@ -89,6 +85,7 @@ export class RecipeEntity {
   @Column({ default: false, nullable: true })
   isLiked: boolean;
 
+  /*
   @OneToMany(
     type => CommentsEntity,
     comment => comment.recipe_id,
@@ -96,6 +93,5 @@ export class RecipeEntity {
   comments: CommentsEntity[];
 
   //body is the comment. just testing
-  @Column('text', { array: true, nullable: true })
-  commentBody: string[];
+  @Column('text', { array: */
 }

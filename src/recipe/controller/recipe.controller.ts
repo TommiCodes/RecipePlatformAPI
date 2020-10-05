@@ -25,8 +25,8 @@ import { v4 as uuidv4 } from 'uuid';
 import path = require('path');
 import { Image } from '../model/Image.interface';
 import { join } from 'path';
-import { CommentsEntity } from 'src/comments/model/comments.entity';
-import { CommentsEntry } from 'src/comments/model/comments.interface';
+import { CommentsEntity } from 'src/comments_NOTUSED/model/comments.entity';
+import { CommentsEntry } from 'src/comments_NOTUSED/model/comments.interface';
 
 export const BLOG_ENTRIES_URL = 'http://localhost:3000/api/recipe-entries';
 

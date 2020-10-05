@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { UserRole } from './user.interface';
 import { RecipeEntity } from 'src/recipe/model/recipe-entry.entity';
-import { CommentsEntity } from 'src/comments/model/comments.entity';
+import { CommentsEntity } from 'src/comments_NOTUSED/model/comments.entity';
 
 @Entity()
 export class UserEntity {

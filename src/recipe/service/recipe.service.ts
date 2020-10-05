@@ -6,14 +6,13 @@ import { RecipeEntity } from '../model/recipe-entry.entity';
 import { Repository } from 'typeorm';
 import { UserService } from 'src/user/service/user.service';
 import { User } from 'src/user/models/user.interface';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import {
   Pagination,
   IPaginationOptions,
   paginate,
 } from 'nestjs-typeorm-paginate';
-import { CommentsEntity } from 'src/comments/model/comments.entity';
-import { CommentsEntry } from 'src/comments/model/comments.interface';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const slugify = require('slugify');
 
 @Injectable()

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import {
   Controller,
   Post,
@@ -17,7 +20,6 @@ import { RecipeService } from '../service/recipe.service';
 import { Observable, of } from 'rxjs';
 import { RecipeEntry } from '../model/recipe-entry.interface';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
-import { RecipeEntity } from '../model/recipe-entry.entity';
 import { UserIsAuthorGuard } from '../guards/user-is-author.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -25,8 +27,6 @@ import { v4 as uuidv4 } from 'uuid';
 import path = require('path');
 import { Image } from '../model/Image.interface';
 import { join } from 'path';
-import { CommentsEntity } from 'src/comments_NOTUSED/model/comments.entity';
-import { CommentsEntry } from 'src/comments_NOTUSED/model/comments.interface';
 
 export const BLOG_ENTRIES_URL = 'http://localhost:3000/api/recipe-entries';
 
@@ -118,7 +118,7 @@ export class BlogController {
   @UseGuards(JwtAuthGuard)
   @Post('image/upload')
   @UseInterceptors(FileInterceptor('file', storage))
-  uploadFile(@UploadedFile() file, @Request() req): Observable<Image> {
+  uploadFile(@UploadedFile() file): Observable<Image> {
     return of(file);
   }
 

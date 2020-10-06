@@ -12,9 +12,9 @@ import {
   Param,
   Delete,
   Put,
-  UseInterceptors,
   UploadedFile,
   Res,
+  UseInterceptors,
 } from '@nestjs/common';
 import { RecipeService } from '../service/recipe.service';
 import { Observable, of } from 'rxjs';
@@ -28,6 +28,7 @@ import path = require('path');
 import { Image } from '../model/Image.interface';
 import { join } from 'path';
 import { User } from 'src/user/models/user.interface';
+import { RecipeEntity } from '../model/recipe-entry.entity';
 
 export const BLOG_ENTRIES_URL = 'http://localhost:3000/api/recipe-entries';
 
@@ -168,13 +169,19 @@ export class BlogController {
   async createIngredients(
     @Param('id') id: number,
     @Body('ingr') ingr: string,
-  ): Promise<RecipeEntry> {
+  ): Promise<string> {
     return await this.recipeService.createIngredients(id, ingr);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('ingredients/:id')
-  async findAllIngredients(@Param('id') id: number): Promise<string[]> {
+  async findAllIngredients(@Param('id') id: number): Promise<RecipeEntry> {
     return await this.recipeService.findAllIngredients(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('macros/:id')
+  async findAllMacros(@Param('id') id: number): Promise<RecipeEntry> {
+    return await this.recipeService.findAllMacros(id);
   }
 }

@@ -4,7 +4,6 @@ import { RecipeEntry } from '../model/recipe-entry.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RecipeEntity } from '../model/recipe-entry.entity';
 import { Repository } from 'typeorm';
-import { UserService } from 'src/user/service/user.service';
 import { User } from 'src/user/models/user.interface';
 import { switchMap, map } from 'rxjs/operators';
 import {
@@ -12,9 +11,7 @@ import {
   IPaginationOptions,
   paginate,
 } from 'nestjs-typeorm-paginate';
-import axios from 'axios';
 import { MacrosService } from 'src/macros/service/macros.service';
-import { MacroEntity } from 'src/macros/models/macros.entity';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const slugify = require('slugify');
 
@@ -23,7 +20,6 @@ export class RecipeService {
   constructor(
     @InjectRepository(RecipeEntity)
     private readonly recipeRepository: Repository<RecipeEntity>,
-    private userService: UserService,
     @Inject('MacrosService')
     private readonly macroService: MacrosService,
   ) {}
@@ -128,46 +124,44 @@ export class RecipeService {
     return await recipe.likes.length;
   }
 
-  async createIngredients(id: number, ingr: string): Promise<RecipeEntry> {
+  async createIngredients(id: number, ingr: string): Promise<string> {
     const recipe = await this.findOne(id).toPromise();
     recipe.ingr.push(ingr);
-    console.log(ingr);
     const macros = await this.macroService.getAllNutrients(ingr);
     recipe.calories += macros.calories;
-    console.log('1');
-
     recipe.carbs += parseFloat(macros.totalNutrients.CHOCDF.quantity);
-    console.log('2');
-
     recipe.cholesterol += parseFloat(macros.totalNutrients.CHOLE.quantity);
-    console.log('3');
-
     recipe.dietLabels = macros.dietLabels;
-    console.log('4');
-
     recipe.fats += parseFloat(macros.totalNutrients.FAT.quantity);
-    console.log('5');
-
     recipe.protein += macros.totalNutrients.PROCNT.quantity;
-    console.log('6');
-
     recipe.sugar += parseFloat(macros.totalNutrients.SUGAR.quantity);
-    console.log('7');
-
     recipe.totalWeight += parseFloat(macros.totalWeight);
-    console.log('8');
-
     recipe.water += parseFloat(macros.totalNutrients.WATER.quantity);
-    console.log('9');
+    this.recipeRepository.save(recipe);
 
-    console.log(recipe);
-
-    return await this.recipeRepository.save(recipe);
+    return ingr;
   }
 
-  async findAllIngredients(id: number): Promise<string[]> {
-    const recipe = await this.findOne(id).toPromise();
-    return recipe.ingr;
+  async findAllIngredients(id: number): Promise<RecipeEntry> {
+    return await this.recipeRepository.findOne(id, {
+      select: ['ingr'],
+    });
+  }
+
+  async findAllMacros(id: number): Promise<RecipeEntry> {
+    return await this.recipeRepository.findOne(id, {
+      select: [
+        'totalWeight',
+        'dietLabels',
+        'protein',
+        'carbs',
+        'fats',
+        'sugar',
+        'calories',
+        'cholesterol',
+        'water',
+      ],
+    });
   }
 
   /**

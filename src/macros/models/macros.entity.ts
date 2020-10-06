@@ -1,11 +1,5 @@
 import { RecipeEntity } from 'src/recipe/model/recipe-entry.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('macro_entity')
 export class MacroEntity {
@@ -35,7 +29,7 @@ export class MacroEntity {
 
   // subject entity
   @ManyToMany(
-    type => RecipeEntity,
+    () => RecipeEntity,
     recipe => recipe.macros,
   )
   macros: RecipeEntity[];

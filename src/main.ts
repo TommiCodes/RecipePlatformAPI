@@ -8,6 +8,7 @@ import * as rateLimit from 'express-rate-limit';
 
 import * as dotenv from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
+require('newrelic');
 dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

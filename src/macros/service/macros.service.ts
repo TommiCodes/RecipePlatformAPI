@@ -1,21 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { MacroEntity } from '../models/macros.entity';
 import axios from 'axios';
-import { RecipeEntity } from 'src/recipe/model/recipe-entry.entity';
-import { MacroEntry } from '../models/macros.interface';
+import * as dotenv from 'dotenv';
+dotenv.config();
 @Injectable()
 export class MacrosService {
-  constructor(
-    @InjectRepository(MacroEntity)
-    private readonly macroRepository: Repository<MacroEntity>,
-  ) {}
-
   async getAllNutrients(ingr: string) {
     const headersRequest = {
-      'x-rapidapi-host': 'edamam-edamam-nutrition-analysis.p.rapidapi.com',
-      'x-rapidapi-key': '5664b75c9fmsh66ac8e054422eb9p1600b8jsn878d097e8d2a',
+      'x-rapidapi-host': `${process.env.NUTRI_HOST}`,
+      'x-rapidapi-key': `${process.env.NUTRI_KEY}`,
       useQueryString: true,
     };
     const result = await axios.get(

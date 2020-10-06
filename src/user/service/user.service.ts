@@ -12,6 +12,9 @@ import {
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
+import { InjectSendGrid } from '@ntegral/nestjs-sendgrid/dist/common/sendgrid.decorator';
+import { SendGridService } from '@ntegral/nestjs-sendgrid/dist/services/sendgrid.service';
+import { EmailService } from 'src/email/service/email/email.service';
 
 @Injectable()
 export class UserService {
@@ -19,6 +22,7 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private authService: AuthService,
+    private readonly emailService: EmailService,
   ) {}
 
   create(user: User): Observable<User> {
@@ -34,6 +38,7 @@ export class UserService {
         return from(this.userRepository.save(newUser)).pipe(
           map((user: User) => {
             const { password, ...result } = user;
+            this.emailService.sendWelComeEmail(user.email);
             return result;
           }),
           catchError(err => throwError(err)),

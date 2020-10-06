@@ -11,5 +11,6 @@ import { BlogModule } from '../recipe/recipe.module';
   ],
   providers: [MacrosService],
   controllers: [MacrosController],
+  exports: [MacrosService],
 })
 export class MacrosModule {}

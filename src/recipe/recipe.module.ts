@@ -9,7 +9,12 @@ import { MacrosModule } from 'src/macros/macros.module';
 import { MacroEntity } from 'src/macros/models/macros.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([RecipeEntity]), AuthModule, UserModule],
+  imports: [
+    TypeOrmModule.forFeature([RecipeEntity]),
+    AuthModule,
+    UserModule,
+    MacrosModule,
+  ],
   controllers: [BlogController],
   providers: [RecipeService],
 })

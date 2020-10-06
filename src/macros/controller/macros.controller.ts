@@ -1,15 +1,11 @@
 import { Controller, Param, Post, UseGuards, Request } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-guard';
-import { RecipeService } from 'src/recipe/service/recipe.service';
 import { MacroEntry } from '../models/macros.interface';
 import { MacrosService } from '../service/macros.service';
 
 @Controller('macros')
 export class MacrosController {
-  constructor(
-    private recipeService: RecipeService,
-    private macroService: MacrosService,
-  ) {}
+  constructor(private macroService: MacrosService) {}
 
   /*
     @Get('/list?:ingr')

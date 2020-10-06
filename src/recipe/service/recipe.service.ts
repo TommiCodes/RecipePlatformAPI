@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Observable, of, from } from 'rxjs';
 import { RecipeEntry } from '../model/recipe-entry.interface';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,6 +23,8 @@ export class RecipeService {
     @InjectRepository(RecipeEntity)
     private readonly recipeRepository: Repository<RecipeEntity>,
     private userService: UserService,
+    @Inject('MacrosService')
+    private readonly macroService: MacrosService,
   ) {}
 
   create(user: User, recipeEntry: RecipeEntry): Observable<RecipeEntry> {
@@ -129,9 +131,9 @@ export class RecipeService {
     const recipe = await this.findOne(id).toPromise();
     recipe.ingr.push(ingr);
     console.log(ingr);
-    const macros = await this.getAllNutrients(ingr);
+    const macros = await this.macroService.getAllNutrients(ingr);
     console.log(macros);
-    recipe.calorieQuantity += macros.calories;
+    recipe.calories += macros.calories;
     /*recipe.carbQuantity += parseFloat(macros.totalNutrients.CHOCDF.quantity);
     recipe.cholesterolQuantity += parseFloat(
       macros.totalNutrients.CHOLE.quantity,
@@ -153,17 +155,4 @@ export class RecipeService {
   /**
    * AUX METHOS
    *  */
-
-  async getAllNutrients(ingr: string) {
-    const headersRequest = {
-      'x-rapidapi-host': 'edamam-edamam-nutrition-analysis.p.rapidapi.com',
-      'x-rapidapi-key': '5664b75c9fmsh66ac8e054422eb9p1600b8jsn878d097e8d2a',
-      useQueryString: true,
-    };
-    const result = await axios.get(
-      'https://edamam-edamam-nutrition-analysis.p.rapidapi.com/api/nutrition-data',
-      { params: { ingr: ingr.toString() }, headers: headersRequest },
-    );
-    return await result.data;
-  }
 }

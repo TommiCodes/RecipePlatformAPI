@@ -104,5 +104,5 @@ export class RecipeEntity {
   sugarQuantity: number;*/
 
   @Column({ default: 0 })
-  calorieQuantity: number;
+  calories: number;
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RecipeService } from 'src/recipe/service/recipe.service';
 import { Repository } from 'typeorm';
 import { MacroEntity } from '../models/macros.entity';
 import axios from 'axios';
@@ -11,7 +10,6 @@ export class MacrosService {
   constructor(
     @InjectRepository(MacroEntity)
     private readonly macroRepository: Repository<MacroEntity>,
-    private recipeService: RecipeService,
   ) {}
 
   async getAllNutrients(ingr: string) {

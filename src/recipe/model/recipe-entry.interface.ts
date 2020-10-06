@@ -19,7 +19,7 @@ export interface RecipeEntry {
   comments?: string[];
   ingr: string[];
   macros: MacroEntity[];
-  calorieQuantity?: number;
+  calories?: number;
   /*totalWeight?: number;
   dietLabels?: string[];
   proteinQuantity?: number;

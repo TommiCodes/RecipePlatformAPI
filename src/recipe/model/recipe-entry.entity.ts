@@ -85,24 +85,30 @@ export class RecipeEntity {
   macros: MacroEntity[];
 
   //delete LATER
-  /*@Column({ default: 0 })
-  totalWeight: number;
+  @Column({ default: 0, nullable: true, type: 'real' })
+  totalWeight: string;
 
-  @Column('text', { array: true, default: '{}' })
+  @Column('text', { array: true, default: '{}', nullable: true })
   dietLabels: string[];
 
-  @Column({ default: 0 })
-  proteinQuantity: number;
+  @Column({ default: 0, nullable: true, type: 'real' })
+  protein: string;
 
-  @Column({ default: 0 })
-  carbQuantity: number;
+  @Column({ default: 0, nullable: true, type: 'real' })
+  carbs: string;
 
-  @Column({ default: 0 })
-  fatQuantity: number;
+  @Column({ default: 0, nullable: true, type: 'real' })
+  fats: string;
 
-  @Column({ default: 0 })
-  sugarQuantity: number;*/
+  @Column({ default: 0, nullable: true, type: 'real' })
+  sugar: string;
 
-  @Column({ default: 0 })
-  calories: number;
+  @Column({ default: 0, nullable: true, type: 'real' })
+  calories: string;
+
+  @Column({ default: 0, nullable: true, type: 'real' })
+  cholesterol: string;
+
+  @Column({ default: 0, nullable: true, type: 'real' })
+  water: string;
 }

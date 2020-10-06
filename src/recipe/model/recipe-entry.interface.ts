@@ -17,17 +17,17 @@ export interface RecipeEntry {
   likes?: number[];
   isLiked?: boolean;
   comments?: string[];
-  ingr: string[];
-  macros: MacroEntity[];
-  calories?: number;
-  /*totalWeight?: number;
+  ingr?: string[];
+  macros?: MacroEntity[];
+  totalWeight?: string;
   dietLabels?: string[];
-  proteinQuantity?: number;
-  carbQuantity?: number;
-  fatQuantity?: number;
-  sugarQuantity?: number;
-  waterQuantity?: number;*/
-
+  protein?: string;
+  carbs?: string;
+  fats?: string;
+  sugar?: string;
+  calories?: string;
+  cholesterol?: string;
+  water?: string;
   //comments?: CommentsEntity[];
   //commentBody?: string[];
 }

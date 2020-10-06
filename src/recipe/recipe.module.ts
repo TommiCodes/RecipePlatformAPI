@@ -6,7 +6,6 @@ import { UserModule } from 'src/user/user.module';
 import { BlogController } from './controller/recipe.controller';
 import { RecipeService } from './service/recipe.service';
 import { MacrosModule } from 'src/macros/macros.module';
-import { MacroEntity } from 'src/macros/models/macros.entity';
 
 @Module({
   imports: [

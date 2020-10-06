@@ -1,5 +1,6 @@
 SELECT *
-FROM recipe_entry_macros_macro_entity
+FROM recipe_entry
+WHERE id=13
 
 
 

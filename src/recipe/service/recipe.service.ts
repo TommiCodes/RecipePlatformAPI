@@ -14,6 +14,7 @@ import {
 } from 'nestjs-typeorm-paginate';
 import axios from 'axios';
 import { MacrosService } from 'src/macros/service/macros.service';
+import { MacroEntity } from 'src/macros/models/macros.entity';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const slugify = require('slugify');
 
@@ -132,18 +133,35 @@ export class RecipeService {
     recipe.ingr.push(ingr);
     console.log(ingr);
     const macros = await this.macroService.getAllNutrients(ingr);
-    console.log(macros);
     recipe.calories += macros.calories;
-    /*recipe.carbQuantity += parseFloat(macros.totalNutrients.CHOCDF.quantity);
-    recipe.cholesterolQuantity += parseFloat(
-      macros.totalNutrients.CHOLE.quantity,
-    );
+    console.log('1');
+
+    recipe.carbs += parseFloat(macros.totalNutrients.CHOCDF.quantity);
+    console.log('2');
+
+    recipe.cholesterol += parseFloat(macros.totalNutrients.CHOLE.quantity);
+    console.log('3');
+
     recipe.dietLabels = macros.dietLabels;
-    recipe.fatQuantity += parseFloat(macros.totalNutrients.FAT.quantity);
-    recipe.proteinQuantity += parseFloat(macros.totalNutrients.PROCNT.quantity);
-    recipe.sugarQuantity += parseFloat(macros.totalNutrients.SUGAR.quantity);
+    console.log('4');
+
+    recipe.fats += parseFloat(macros.totalNutrients.FAT.quantity);
+    console.log('5');
+
+    recipe.protein += macros.totalNutrients.PROCNT.quantity;
+    console.log('6');
+
+    recipe.sugar += parseFloat(macros.totalNutrients.SUGAR.quantity);
+    console.log('7');
+
     recipe.totalWeight += parseFloat(macros.totalWeight);
-    recipe.waterQuantity += parseFloat(macros.totalNutrients.WATER.quantity);*/
+    console.log('8');
+
+    recipe.water += parseFloat(macros.totalNutrients.WATER.quantity);
+    console.log('9');
+
+    console.log(recipe);
+
     return await this.recipeRepository.save(recipe);
   }
 

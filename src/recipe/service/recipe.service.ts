@@ -12,6 +12,8 @@ import {
   paginate,
 } from 'nestjs-typeorm-paginate';
 import { MacrosService } from 'src/macros/service/macros.service';
+import { CommentsEntity } from 'src/comments/model/comments.entity';
+import { CommentsEntry } from 'src/comments/model/comments.interface';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const slugify = require('slugify');
 
@@ -20,6 +22,8 @@ export class RecipeService {
   constructor(
     @InjectRepository(RecipeEntity)
     private readonly recipeRepository: Repository<RecipeEntity>,
+    @InjectRepository(CommentsEntity)
+    private readonly commentsRepository: Repository<CommentsEntity>,
     @Inject('MacrosService')
     private readonly macroService: MacrosService,
   ) {}
@@ -97,23 +101,24 @@ export class RecipeService {
     recipe.comments.push(comment);
     return await this.recipeRepository.save(recipe);
   }*/
-  createComment(id: number, comment: string): Observable<RecipeEntry> {
-    return from(this.findOne(id).pipe({
-      switchMap((recipe: recipeEntry) => {
-        return from(this.commentRepository.save(newComment)).pipe(
-          map(com: Comment) => {
-            recipe.comment.push(com);
+  
+  createComment(id:number, commentEntry: string):Observable<RecipeEntry> {
+    return from (this.findOne(id)).pipe(
+      switchMap((recipe: RecipeEntry) => {
+        return from(this.commentsRepository.save(commentEntry)).pipe(
+          map((com: CommentsEntry) => {
+            recipe.comments.push(com);
             return from(this.recipeRepository.save(recipe))
-          }
+          })
         )
       })
-    }))
+    )
   }
 
-  async findAllComments(id: number): Promise<string[]> {
+  /*async findAllComments(id: number): Promise<string[]> {
     const recipe = await this.findOne(id).toPromise();
     return recipe.comments;
-  }
+  }*/
 
   async createLikes(user: User, recipe_id: number): Promise<RecipeEntry> {
     const recipe = await this.findOne(recipe_id).toPromise();

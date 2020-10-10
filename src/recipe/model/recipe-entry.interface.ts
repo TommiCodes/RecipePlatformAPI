@@ -1,3 +1,4 @@
+import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { MacroEntity } from 'src/macros/models/macros.entity';
 //import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { User } from 'src/user/models/user.interface';
@@ -16,7 +17,7 @@ export interface RecipeEntry {
   isPublished?: boolean;
   likes?: number[];
   isLiked?: boolean;
-  comments?: string[];
+  //comments?: string[];
   ingr?: string[];
   macros?: MacroEntity[];
   totalWeight?: string;
@@ -28,6 +29,6 @@ export interface RecipeEntry {
   calories?: string;
   cholesterol?: string;
   water?: string;
-  //comments?: CommentsEntity[];
+  comments?: CommentsEntity[];
   //commentBody?: string[];
 }

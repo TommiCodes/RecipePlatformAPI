@@ -142,11 +142,11 @@ export class BlogController {
     return this.recipeService.createComment(id, commentEntry);
   }
 
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)
   @Get('comments/:id')
   async findAllComments(@Param('id') id: number): Promise<string[]> {
     return await this.recipeService.findAllComments(id);
-  }
+  }*/
 
   @UseGuards(JwtAuthGuard)
   @Post('likes/:id')

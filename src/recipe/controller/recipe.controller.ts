@@ -46,7 +46,7 @@ export const storage = {
 };
 
 @Controller('recipe-entries')
-export class BlogController {
+export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
   @UseGuards(JwtAuthGuard)

@@ -98,7 +98,7 @@ export class RecipeController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Observable<RecipeEntity> {
+  findOne(@Param('id') id: number): Observable<RecipeEntry> {
     return this.recipeService.findOne(id);
   }
 
@@ -107,7 +107,7 @@ export class RecipeController {
   updateOne(
     @Param('id') id: number,
     @Body() recipeEntry: RecipeEntry,
-  ): Observable<RecipeEntity> {
+  ): Observable<RecipeEntry> {
     return this.recipeService.updateOne(Number(id), recipeEntry);
   }
 

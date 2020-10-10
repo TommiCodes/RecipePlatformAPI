@@ -22,7 +22,7 @@ export interface RecipeEntry {
   isLiked?: boolean;
   //comments?: string[];
   ingr?: string[];
-  macros?: MacroEntry[];
+  macros?: MacroEntity[];
   totalWeight?: string;
   dietLabels?: string[];
   protein?: string;
@@ -32,6 +32,6 @@ export interface RecipeEntry {
   calories?: string;
   cholesterol?: string;
   water?: string;
-  comments?: CommentsEntry[];
+  comments?: CommentsEntity[];
   //commentBody?: string[];
 }

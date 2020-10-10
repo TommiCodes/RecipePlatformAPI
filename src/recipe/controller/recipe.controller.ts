@@ -46,7 +46,7 @@ export const storage = {
 };
 
 @Controller('recipe-entries')
-export class BlogController {
+export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
   @UseGuards(JwtAuthGuard)
@@ -98,7 +98,7 @@ export class BlogController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Observable<RecipeEntry> {
+  findOne(@Param('id') id: number): Observable<RecipeEntity> {
     return this.recipeService.findOne(id);
   }
 
@@ -107,7 +107,7 @@ export class BlogController {
   updateOne(
     @Param('id') id: number,
     @Body() recipeEntry: RecipeEntry,
-  ): Observable<RecipeEntry> {
+  ): Observable<RecipeEntity> {
     return this.recipeService.updateOne(Number(id), recipeEntry);
   }
 
@@ -153,7 +153,7 @@ export class BlogController {
   async createLikes(
     @Param('id') recipe_id: number,
     @Request() req,
-  ): Promise<RecipeEntry> {
+  ): Promise<RecipeEntity> {
     const user = req.user;
     return await this.recipeService.createLikes(user, recipe_id);
   }
@@ -175,13 +175,13 @@ export class BlogController {
 
   @UseGuards(JwtAuthGuard)
   @Get('ingredients/:id')
-  async findAllIngredients(@Param('id') id: number): Promise<RecipeEntry> {
+  async findAllIngredients(@Param('id') id: number): Promise<RecipeEntity> {
     return await this.recipeService.findAllIngredients(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('macros/:id')
-  async findAllMacros(@Param('id') id: number): Promise<RecipeEntry> {
+  async findAllMacros(@Param('id') id: number): Promise<RecipeEntity> {
     return await this.recipeService.findAllMacros(id);
   }
 }

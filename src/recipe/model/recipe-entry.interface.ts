@@ -1,5 +1,8 @@
 import { CommentsEntity } from 'src/comments/model/comments.entity';
+import { CommentsEntry } from 'src/comments/model/comments.interface';
 import { MacroEntity } from 'src/macros/models/macros.entity';
+import { MacroEntry } from 'src/macros/models/macros.interface';
+import { UserEntity } from 'src/user/models/user.entity';
 //import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { User } from 'src/user/models/user.interface';
 
@@ -11,7 +14,7 @@ export interface RecipeEntry {
   body?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  author?: User;
+  author: User;
   headerImage?: string;
   publishedDate?: Date;
   isPublished?: boolean;
@@ -19,7 +22,7 @@ export interface RecipeEntry {
   isLiked?: boolean;
   //comments?: string[];
   ingr?: string[];
-  macros?: MacroEntity[];
+  macros?: MacroEntry[];
   totalWeight?: string;
   dietLabels?: string[];
   protein?: string;
@@ -29,6 +32,6 @@ export interface RecipeEntry {
   calories?: string;
   cholesterol?: string;
   water?: string;
-  comments?: CommentsEntity[];
+  comments?: CommentsEntry[];
   //commentBody?: string[];
 }

@@ -1,5 +1,4 @@
 import { CommentsEntity } from 'src/comments/model/comments.entity';
-import { CommentsEntry } from 'src/comments/model/comments.interface';
 import { MacroEntity } from 'src/macros/models/macros.entity';
 import { MacroEntry } from 'src/macros/models/macros.interface';
 import { UserEntity } from 'src/user/models/user.entity';

@@ -10,7 +10,7 @@ export interface RecipeEntry {
   body?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  author?: User;
+  author: User;
   headerImage?: string;
   publishedDate?: Date;
   isPublished?: boolean;
@@ -20,7 +20,7 @@ export interface RecipeEntry {
 
   // Ingredients
   ingr?: string[];
-  macros?: MacroEntry[];
+  macros?: MacroEntity[];
   totalWeight?: string;
   dietLabels?: string[];
   protein?: string;

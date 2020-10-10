@@ -7,9 +7,11 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
 import { MacroEntity } from 'src/macros/models/macros.entity';
+import { CommentsEntity } from 'src/comments/model/comments.entity';
 
 @Entity('recipe_entry')
 export class RecipeEntity {
@@ -64,20 +66,20 @@ export class RecipeEntity {
   @Column({ default: false, nullable: true })
   isLiked: boolean;
 
-  @Column('text', { array: true, nullable: true, default: '{}' })
-  comments: string[];
+  /*@Column('text', { array: true, nullable: true, default: '{}' })
+  comments: string[];*/
 
   @Column('text', { array: true, nullable: true, default: '{}' })
   ingr: string[];
-  /*
+  
   @OneToMany(
     type => CommentsEntity,
     comment => comment.recipe_id,
   )
   comments: CommentsEntity[];
 
-  //body is the comment. just testing
-  @Column('text', { array: */
+  
+  
 
   //Macro table TODO LATER
   @ManyToMany(() => MacroEntity)

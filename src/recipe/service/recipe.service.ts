@@ -92,10 +92,22 @@ export class RecipeService {
     return of(slugify(title));
   }
 
-  async createComment(id: number, comment: string): Promise<RecipeEntry> {
+  /*async createComment(id: number, comment: string): Promise<RecipeEntry> {
     const recipe = await this.findOne(id).toPromise();
     recipe.comments.push(comment);
     return await this.recipeRepository.save(recipe);
+  }*/
+  createComment(id: number, comment: string): Observable<RecipeEntry> {
+    return from(this.findOne(id).pipe({
+      switchMap((recipe: recipeEntry) => {
+        return from(this.commentRepository.save(newComment)).pipe(
+          map(com: Comment) => {
+            recipe.comment.push(com);
+            return from(this.recipeRepository.save(recipe))
+          }
+        )
+      })
+    }))
   }
 
   async findAllComments(id: number): Promise<string[]> {

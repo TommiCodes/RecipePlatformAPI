@@ -135,11 +135,11 @@ export class BlogController {
 
   @UseGuards(JwtAuthGuard)
   @Post('comment/:id')
-  async createComment(
+  createComment(
     @Param('id') id: number,
-    @Body('comment') comment: string,
-  ): Promise<RecipeEntry> {
-    return await this.recipeService.createComment(id, comment);
+    @Body('comment') commentEntry: string,
+  ): Observable<RecipeEntry> {
+    return this.recipeService.createComment(id, commentEntry);
   }
 
   @UseGuards(JwtAuthGuard)

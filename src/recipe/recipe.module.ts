@@ -7,6 +7,7 @@ import { RecipeController as RecipeController } from './controller/recipe.contro
 import { RecipeService } from './service/recipe.service';
 import { MacrosModule } from 'src/macros/macros.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CommentsModule } from 'src/comments/comments.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     AuthModule,
     UserModule,
     MacrosModule,
+    CommentsModule
   ],
   controllers: [RecipeController],
   providers: [

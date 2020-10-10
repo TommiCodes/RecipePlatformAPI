@@ -14,18 +14,16 @@ import {
 import { MacrosService } from 'src/macros/service/macros.service';
 import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { CommentsEntry } from 'src/comments/model/comments.interface';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { CommentsService } from 'src/comments/service/comments/comments.service';
 const slugify = require('slugify');
 
 @Injectable()
 export class RecipeService {
+
   constructor(
-    @InjectRepository(RecipeEntity)
-    private readonly recipeRepository: Repository<RecipeEntity>,
-    @InjectRepository(CommentsEntity)
-    private readonly commentsRepository: Repository<CommentsEntity>,
-    @Inject('MacrosService')
-    private readonly macroService: MacrosService,
+    @InjectRepository(RecipeEntity) private readonly recipeRepository: Repository<RecipeEntity>,
+    @Inject('MacrosService') private readonly macroService: MacrosService,
+    private commentsService: CommentsService
   ) {}
 
   create(user: User, recipeEntry: RecipeEntry): Observable<RecipeEntry> {
@@ -40,7 +38,7 @@ export class RecipeService {
   }
 
   findAll(): Observable<RecipeEntry[]> {
-    return from(this.recipeRepository.find({ relations: ['author'] }));
+    return from(this.recipeRepository.find({relations: ['author']}));
   }
 
   paginateAll(
@@ -102,17 +100,19 @@ export class RecipeService {
     return await this.recipeRepository.save(recipe);
   }*/
   
-  createComment(id:number, commentEntry: string):Observable<RecipeEntry> {
-    return from (this.findOne(id)).pipe(
+  createComment(id:number, text: string):Observable<RecipeEntry> {
+    return from(this.findOne(id)).pipe(
       switchMap((recipe: RecipeEntry) => {
-        return from(this.commentsRepository.save(commentEntry)).pipe(
-          map((com: CommentsEntry) => {
-            recipe.comments.push(com);
+        const comment = new CommentsEntity();
+        comment.comment = text;
+        return from(this.commentsService.create(comment)).pipe(
+          switchMap((comment: CommentsEntry) => {
+            recipe.comments.push(comment);
             return from(this.recipeRepository.save(recipe))
           })
         )
-      })
-    )
+      }      
+    ))
   }
 
   /*async findAllComments(id: number): Promise<string[]> {

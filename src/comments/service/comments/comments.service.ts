@@ -17,40 +17,7 @@ export class CommentsService {
     private readonly commentRepository: Repository<CommentsEntity>,
   ) {}
 
-
-  
-
-  /*async create(
-    id: number,
-    user: User,
-    comment: CommentsEntity,
-  ): Promise<CommentsEntry> {
-    const recipe = await this.recipeRepository.findOne(id);
-    
-
-  }*/
-  /*
-  async addComment(recipeId, commentsEntry: CommentsEntry) {
-    const recipe = await this.recipeRepository.find(recipeId);
-    const result = recipe.map(c => {
-      c.comments.push(commentsEntry);
-    });
-    console.log(result);
-    return result;
+  create(comment: CommentsEntry): Observable<CommentsEntry> {
+    return from(this.commentRepository.save(comment));
   }
-
-  private async findRecipe(id: number): Promise<RecipeEntry> {
-    let recipe;
-    try {
-      recipe = await this.commentRepository.findOne(id);
-      console.log(id);
-      console.log(recipe);
-    } catch (error) {
-      throw new NotFoundException('could not find recipe');
-    }
-    if (!recipe) {
-      throw new NotFoundException('could not find recipe');
-    }
-    return recipe;
-  }*/
 }

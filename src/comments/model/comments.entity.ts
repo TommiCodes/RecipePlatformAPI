@@ -17,6 +17,9 @@ export class CommentsEntity {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
+  @Column()
+  comment: string;
+
   @ManyToOne(() => UserEntity, user => user.commentEntries)
   author: UserEntity;
 

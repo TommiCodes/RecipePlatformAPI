@@ -1,6 +1,6 @@
 import { RecipeEntity } from 'src/recipe/model/recipe-entry.entity';
 
-//import { CommentsEntity } from 'src/comments_NOTUSED/model/comments.entity';
+//import { CommentsEntity } from 'src/comments/model/comments.entity';
 export interface MacroEntry {
   id?: number;
   totalWeight?: number;

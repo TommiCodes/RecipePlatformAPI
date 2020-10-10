@@ -1,5 +1,5 @@
 import { MacroEntity } from 'src/macros/models/macros.entity';
-//import { CommentsEntity } from 'src/comments_NOTUSED/model/comments.entity';
+//import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { User } from 'src/user/models/user.interface';
 
 export interface RecipeEntry {

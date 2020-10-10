@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { BlogModule } from './recipe/recipe.module';
-import { CommentsModule } from './comments_NOTUSED/comments.module';
+import { CommentsModule } from './comments/comments.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { SendGridModule } from '@ntegral/nestjs-sendgrid/dist/sendgrid.module';
 import { EmailModule } from './email/email.module';

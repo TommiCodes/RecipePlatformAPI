@@ -1,5 +1,5 @@
 /*import { Controller } from '@nestjs/common';
-import { CommentsService } from 'src/comments_NOTUSED/service/comments/comments.service';
+import { CommentsService } from 'src/comments/service/comments/comments.service';
 
 @Controller('comment-entries')
 export class CommentsController {

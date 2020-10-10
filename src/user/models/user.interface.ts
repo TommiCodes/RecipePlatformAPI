@@ -1,4 +1,4 @@
-import { CommentsEntry } from 'src/comments_NOTUSED/model/comments.interface';
+import { CommentsEntry } from 'src/comments/model/comments.interface';
 import { RecipeEntry } from 'src/recipe/model/recipe-entry.interface';
 
 export interface User {

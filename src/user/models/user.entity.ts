@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -12,6 +11,7 @@ import { CommentsEntity } from 'src/comments/model/comments.entity';
 
 @Entity()
 export class UserEntity {
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -33,16 +33,10 @@ export class UserEntity {
   @Column({ nullable: true })
   profileImage: string;
 
-  @OneToMany(
-    type => RecipeEntity,
-    recipeEntity => recipeEntity.author,
-  )
+  @OneToMany(type => RecipeEntity, recipeEntity => recipeEntity.author)
   recipeEntries: RecipeEntity[];
 
-  @OneToMany(
-    type => CommentsEntity,
-    comment => comment.author,
-  )
+  @OneToMany(type => CommentsEntity, comment => comment.author)
   commentEntries: CommentsEntity[];
 
   @BeforeInsert()

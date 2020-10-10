@@ -153,7 +153,7 @@ export class BlogController {
   async createLikes(
     @Param('id') recipe_id: number,
     @Request() req,
-  ): Promise<RecipeEntry> {
+  ): Promise<RecipeEntity> {
     const user = req.user;
     return await this.recipeService.createLikes(user, recipe_id);
   }
@@ -175,13 +175,13 @@ export class BlogController {
 
   @UseGuards(JwtAuthGuard)
   @Get('ingredients/:id')
-  async findAllIngredients(@Param('id') id: number): Promise<RecipeEntry> {
+  async findAllIngredients(@Param('id') id: number): Promise<RecipeEntity> {
     return await this.recipeService.findAllIngredients(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('macros/:id')
-  async findAllMacros(@Param('id') id: number): Promise<RecipeEntry> {
+  async findAllMacros(@Param('id') id: number): Promise<RecipeEntity> {
     return await this.recipeService.findAllMacros(id);
   }
 }

@@ -102,17 +102,16 @@ export class RecipeService {
     return await this.recipeRepository.save(recipe);
   }*/
   
-  createComment(id:number, commentEntry: string):Observable<RecipeEntry> {
-    return from (this.findOne(id)).pipe(
-      switchMap((recipe: RecipeEntry) => {
-        return from(this.commentsRepository.save(commentEntry)).pipe(
+  createComment(id: number, commentEntry: string): Observable<RecipeEntry> {
+    return this.findOne(id).pipe(
+      switchMap((recipe: RecipeEntry) => { 
+      return from(this.commentsRepository.save(commentEntry)).pipe(
           map((com: CommentsEntry) => {
-            recipe.comments.push(com);
-            return from(this.recipeRepository.save(recipe))
+             recipe.comment.push(com)
+             return from(this.recipeRepository.save(recipe))
           })
-        )
-      })
-    )
+      )
+    ))
   }
 
   /*async findAllComments(id: number): Promise<string[]> {
@@ -120,7 +119,7 @@ export class RecipeService {
     return recipe.comments;
   }*/
 
-  async createLikes(user: User, recipe_id: number): Promise<RecipeEntry> {
+  async createLikes(user: User, recipe_id: number): Promise<RecipeEntity> {
     const recipe = await this.findOne(recipe_id).toPromise();
 
     const { likes } = recipe;
@@ -159,13 +158,13 @@ export class RecipeService {
     return ingr;
   }
 
-  async findAllIngredients(id: number): Promise<RecipeEntry> {
+  async findAllIngredients(id: number): Promise<RecipeEntity> {
     return await this.recipeRepository.findOne(id, {
       select: ['ingr'],
     });
   }
 
-  async findAllMacros(id: number): Promise<RecipeEntry> {
+  async findAllMacros(id: number): Promise<RecipeEntity> {
     return await this.recipeRepository.findOne(id, {
       select: [
         'totalWeight',

@@ -1,5 +1,7 @@
 import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { MacroEntity } from 'src/macros/models/macros.entity';
+import { MacroEntry } from 'src/macros/models/macros.interface';
+import { UserEntity } from 'src/user/models/user.entity';
 //import { CommentsEntity } from 'src/comments/model/comments.entity';
 import { User } from 'src/user/models/user.interface';
 
@@ -11,7 +13,7 @@ export interface RecipeEntry {
   body?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  author?: User;
+  author: User;
   headerImage?: string;
   publishedDate?: Date;
   isPublished?: boolean;

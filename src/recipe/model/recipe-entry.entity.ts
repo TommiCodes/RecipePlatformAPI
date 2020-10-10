@@ -15,7 +15,6 @@ import { CommentsEntity } from 'src/comments/model/comments.entity';
 
 @Entity('recipe_entry')
 export class RecipeEntity {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -51,7 +50,14 @@ export class RecipeEntity {
   @Column({ nullable: true })
   isPublished: boolean;
 
-  @ManyToOne(() => UserEntity, user => user.recipeEntries)
+  @Column()
+  user_id: number;
+
+  @ManyToOne(
+    () => UserEntity,
+    user => user.recipeEntries,
+  )
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   author: UserEntity;
 
   @Column('int', { array: true, nullable: true, default: '{}' })
@@ -60,10 +66,16 @@ export class RecipeEntity {
   @Column({ default: false, nullable: true })
   isLiked: boolean;
 
+  /*@Column('text', { array: true, nullable: true, default: '{}' })
+  comments: string[];*/
+
   @Column('text', { array: true, nullable: true, default: '{}' })
   ingr: string[];
   
-  @OneToMany(type => CommentsEntity, comment => comment.recipe)
+  @OneToMany(
+    type => CommentsEntity,
+    comment => comment.recipe_id,
+  )
   comments: CommentsEntity[];
 
   

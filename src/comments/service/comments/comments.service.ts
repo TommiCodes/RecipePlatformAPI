@@ -17,7 +17,8 @@ export class CommentsService {
     private readonly commentRepository: Repository<CommentsEntity>,
   ) {}
 
-  create(comment: CommentsEntry): Observable<CommentsEntry> {
+  create(recipe: RecipeEntry, comment: CommentsEntry): Observable<CommentsEntry> {
+    comment.recipe = recipe;
     return from(this.commentRepository.save(comment));
   }
 }
